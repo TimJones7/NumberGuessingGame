@@ -175,17 +175,102 @@ namespace NumberGuessingGame
             //  Here is where the round battle logic occurs
             //  There is a top and bottom to a round
 
+            //  Top of the round, you pick number for machine to guess
+            Random randA = new Random();
+            int userNum = getUserNumber();
+            int compGuess = randA.Next(MinNum, numOfNumbers);
+            Console.WriteLine($"The computer has guessed {compGuess} and is {userNum - compGuess} away from the actual");
+            endCommands();
+
+            Console.WriteLine("The computer is thinking of a numbner for you to guess...");
+            endCommands();
+            Console.WriteLine("Ok, the computer is ready!");
+            Random randB = new Random();
+            int compNum = randB.Next(MinNum, numOfNumbers);
+            int userGuess = getUserGuess();
 
 
+            Console.WriteLine($"You have guessed {userGuess} and is {compNum - userGuess} away from the actual");
+            endCommands();
+
+            int userOffBy = Math.Abs(compNum - userGuess);
+            int compOffBy = Math.Abs(userNum - compGuess);
+            int diff = userOffBy - compOffBy;
 
 
-
-
-
+            switch (diff)
+            {
+                case <0:
+                    _user.score++;
+                    break;
+                case > 0:
+                    _comp.score++;
+                    break;
+                case 0:
+                    break;
+            }
 
 
         }
 
+        private int getUserNumber()
+        {
+            Console.WriteLine(" ");
+            Console.WriteLine("Pick a number for the computer to guess!");
+            string num = Console.ReadLine();
+            if (num.Length > 0)
+            {
+                int x = Convert.ToInt32(num);
+                if(x > MinNum && x < MaxRange)
+                {
+                    return x;
+                }
+                else
+                {
+                    Console.WriteLine(" ");
+                    Console.WriteLine($"Please pick a number between {MinNum + 1} and {MaxRange - 1}");
+                    endCommands();
+                    return getUserNumber();
+                }
+            }
+            else
+            {
+                Console.WriteLine(" ");
+                Console.WriteLine($"Please pick a number between {MinNum + 1} and {MaxRange - 1}");
+                endCommands();
+                return getUserNumber();
+            }
+        }
+
+        private int getUserGuess()
+        {
+            Console.WriteLine(" ");
+            Console.WriteLine("Try to guess the computer's number!");
+            string num = Console.ReadLine();
+            if (num.Length > 0)
+            {
+                int x = Convert.ToInt32(num);
+                if (x > MinNum && x < MaxRange)
+                {
+                    return x;
+                }
+                else
+                {
+                    Console.WriteLine(" ");
+                    Console.WriteLine($"Please guess a number between {MinNum + 1} and {MaxRange - 1}");
+                    endCommands();
+                    return getUserGuess();
+                }
+            }
+            else
+            {
+                Console.WriteLine(" ");
+                Console.WriteLine($"Please guess a number between {MinNum + 1} and {MaxRange - 1}");
+                endCommands();
+                return getUserGuess();
+            }
+
+        }
 
 
 
@@ -222,6 +307,7 @@ namespace NumberGuessingGame
                 Console.WriteLine(" ");
             }
         }
+       
 
         //  Function to ask if player would like to play again
         private void playAgain()
