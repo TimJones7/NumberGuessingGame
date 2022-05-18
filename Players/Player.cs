@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 namespace NumberGuessingGame.Players
 {
     //  Parent player class for this game
-    internal class Player
+    public class Player
     {
+        //  This will hold the shared attributes players have
+        public string name { get; set; }
+        public int score { get; set; } = 0;
+
 
     }
 }

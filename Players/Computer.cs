@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace NumberGuessingGame.Players
 {
-    public class User : Player
+    public class Computer : Player
     {
-        //  This will have the functionality for a user to guess numbers
-        public User(string _name)
+        //  This will have the functionality needed for computer to guess numbers
+        public Computer(string _name)
         {
             name = _name;
         }
+    }
 }
