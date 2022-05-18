@@ -16,16 +16,30 @@ namespace NumberGuessingGame
         public int numOfRounds { get; set; } = 5;
         public int currentRound { get; set; } = 1;
 
+        public int MinNum = 0;
+        public int MaxNum = 10;
+
         //  Function to start game
         //  Perhaps class constructor can init the sequence of events needed ?
 
 
         //  Ask player what number of rounds to play  
-        public void setNumRounds()
+        public int setNumRounds()
         {
+            //  Min should be 1 and max should be 10
             Console.WriteLine("How many rounds should we play?");
-            numOfRounds = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine($"Ok, you are about to play {numOfRounds}!");
+            int x = Convert.ToInt32(Console.ReadLine());
+
+            if(x > MinNum && x < MaxNum)
+            {
+                Console.WriteLine($"Ok, you are about to play {x}!");
+                return x;
+            }
+            else
+            {
+                Console.WriteLine("Please pick a number between 1 and 10");
+                return setNumRounds();
+            }
         }
 
 
