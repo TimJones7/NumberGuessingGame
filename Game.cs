@@ -48,14 +48,26 @@ namespace NumberGuessingGame
         {
             //  Min should be 1 and max should be 10
             Console.WriteLine("How many rounds should we play today?");
-            int x = Convert.ToInt32(Console.ReadLine());
+            string intRounds = Console.ReadLine();
 
-            if(x > MinNum && x < MaxNum)
+            if (intRounds.Length > 0)
             {
-                Console.WriteLine(" ");
-                Console.WriteLine($"Ok, you are about to play {x} rounds!");
-                endCommands();
-                return x;
+                int x = Convert.ToInt32(intRounds);
+
+                if (x > MinNum && x < MaxNum)
+                {
+                    Console.WriteLine(" ");
+                    Console.WriteLine($"Ok, you are about to play {x} rounds!");
+                    endCommands();
+                    return x;
+                }
+                else
+                {
+                    Console.WriteLine(" ");
+                    Console.WriteLine("Please pick a number between 1 and 10");
+                    endCommands();
+                    return setNumRounds();
+                }
             }
             else
             {
@@ -72,14 +84,27 @@ namespace NumberGuessingGame
         {
             //  Min should be 1 and max should be 100
             Console.WriteLine("How many numbers should we play with today?");
-            int x = Convert.ToInt32(Console.ReadLine());
 
-            if (x > MinNum && x < MaxRange)
+            string playNums = Console.ReadLine();
+
+            if (playNums.Length > 0)
             {
-                Console.WriteLine(" ");
-                Console.WriteLine($"Ok, we will play with {x} numbers!");
-                endCommands();
-                return x;
+                int x = Convert.ToInt32(playNums);
+
+                if (x > MinNum && x < MaxRange)
+                {
+                    Console.WriteLine(" ");
+                    Console.WriteLine($"Ok, we will play with {x} numbers!");
+                    endCommands();
+                    return x;
+                }
+                else
+                {
+                    Console.WriteLine(" ");
+                    Console.WriteLine("Please pick a number between 1 and 100");
+                    endCommands();
+                    return setNumRange();
+                }
             }
             else
             {
@@ -204,10 +229,20 @@ namespace NumberGuessingGame
             Console.WriteLine(" ");
             Console.WriteLine(" ");
             Console.WriteLine("Would you like to play again? [Y] [N]");
-            char n = Console.ReadLine()[0];
-            if(n == 'y' || n == 'Y')
+            string nn = Console.ReadLine();
+
+            if (nn.Length > 0)
             {
-                this.Run();
+                char n = nn[0];
+                if (n == 'y' || n == 'Y')
+                {
+                    this.Run();
+                }
+                else
+                {
+                    Console.WriteLine(" ");
+                    Console.WriteLine("Fine, fuck off!");
+                }
             }
             else
             {
@@ -234,14 +269,14 @@ namespace NumberGuessingGame
             Console.WriteLine(" ");
         }
 
-
+        //  post the current score of the game
         private void postScore()
         {
             Console.WriteLine($"{_user.name} - {_user.score}");
             Console.WriteLine($"{_comp.name} - {_comp.score}");
         }
 
-
+        //  functionality for player to view rules
         private void viewRules()
         {
             Console.WriteLine(" ");
