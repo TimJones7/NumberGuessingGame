@@ -14,21 +14,29 @@ namespace NumberGuessingGame
         public User _user { get; set; }
         public Computer _comp { get; set; }
         public int numOfRounds { get; set; } = 5;
+        public int numOfNumbers { get; set; } = 10;
 
         public int MinNum = 0;
         public int MaxNum = 11;
+        public int MaxRange = 101;
 
         //  Game Constructor
         public Game()
         {
+            Console.WriteLine("Welcome to GUESSING GAME 3000!!!");
+            Console.WriteLine("Created by Tim Jones out of procrastination!");
+            viewRules();
+            endCommands();
             Console.WriteLine("Your game is about to begin!");
             endCommands();
+
         }
 
         //  game.Run() function that will handle the lifecycle of a game
         public void Run()
         {
             numOfRounds = setNumRounds();
+            numOfNumbers = setNumRange();
             setPlayerNames();
             playGame(numOfRounds);
             finishGame();
@@ -57,6 +65,31 @@ namespace NumberGuessingGame
                 return setNumRounds();
             }
         }
+
+
+        //  Set amount of numbers to play with
+        public int setNumRange()
+        {
+            //  Min should be 1 and max should be 100
+            Console.WriteLine("How many numbers should we play with today?");
+            int x = Convert.ToInt32(Console.ReadLine());
+
+            if (x > MinNum && x < MaxRange)
+            {
+                Console.WriteLine(" ");
+                Console.WriteLine($"Ok, we will play with {x} numbers!");
+                endCommands();
+                return x;
+            }
+            else
+            {
+                Console.WriteLine(" ");
+                Console.WriteLine("Please pick a number between 1 and 100");
+                endCommands();
+                return setNumRange();
+            }
+        }
+
 
 
         //  Get player names 
@@ -89,7 +122,7 @@ namespace NumberGuessingGame
         {
             _user = new User(userN);
             _comp = new Computer(compN);
-            Console.WriteLine($"The battle is set between {userN} and {compN} to play {this.numOfRounds} rounds!");
+            Console.WriteLine($"The battle is set between {userN} and {compN} to play {this.numOfRounds} rounds using {numOfNumbers} numbers!");
             endCommands();
         }
 
@@ -112,6 +145,20 @@ namespace NumberGuessingGame
         private void playRound(int i)
         {
             Console.WriteLine($"Starting round {i}!");
+
+
+            //  Here is where the round battle logic occurs
+            //  There is a top and bottom to a round
+
+
+
+
+
+
+
+
+
+
         }
 
 
@@ -193,6 +240,35 @@ namespace NumberGuessingGame
             Console.WriteLine($"{_user.name} - {_user.score}");
             Console.WriteLine($"{_comp.name} - {_comp.score}");
         }
+
+
+        private void viewRules()
+        {
+            Console.WriteLine(" ");
+            Console.WriteLine("Would you like to view the rules? [Y] or enter to skip");
+            
+            string wordsIn = Console.ReadLine();
+
+            if (wordsIn.Length > 0)
+            {
+                char n = wordsIn[0];
+                if (n == 'y' || n == 'Y')
+                {
+                    Console.WriteLine("This is a number guessing game.");
+
+                    Console.WriteLine("You will battle against the computer using a user defined amount of numbers over a user defined number of rounds.");
+                    Console.WriteLine("You will take turns picking a number and guessing what the other player chose");
+                    Console.WriteLine("Whoever guesses closer to the other player's number will win the point.");
+                    Console.WriteLine("Any user who guesses exactly will be awarded 5 points");
+                    Console.WriteLine("Any ties will replay the round");
+                    Console.WriteLine("The game CAN end in a tie between players");
+                    Console.WriteLine("Good luck and thanks for playing!");
+                }
+            }
+        }
+
+
+
 
     }
 }
