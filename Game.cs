@@ -14,10 +14,21 @@ namespace NumberGuessingGame
         public User _user { get; set; }
         public Computer _comp { get; set; }
         public int numOfRounds { get; set; } = 5;
-
+        public int currentRound { get; set; } = 1;
 
         //  Function to start game
-        
+        //  Perhaps class constructor can init the sequence of events needed ?
+
+
+        //  Ask player what number of rounds to play  
+        public void setNumRounds()
+        {
+            Console.WriteLine("How many rounds should we play?");
+            numOfRounds = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine($"Ok, you are about to play {numOfRounds}!");
+        }
+
+
         //  Get player names 
         public void setPlayerNames()
         {
@@ -38,7 +49,8 @@ namespace NumberGuessingGame
 
 
         //  function to create players
-        public void createPlayers(string userN, string compN) 
+        //  private because only this class needs to use it
+        private void createPlayers(string userN, string compN) 
         {
             _user = new User(userN);
             _comp = new Computer(compN);
@@ -48,8 +60,7 @@ namespace NumberGuessingGame
 
 
 
-        //  Ask player what number of rounds to play  
-
+   
 
 
 
