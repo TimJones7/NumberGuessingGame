@@ -13,4 +13,5 @@ namespace NumberGuessingGame.Players
         {
             name = _name;
         }
+    }
 }

@@ -14,30 +14,45 @@ namespace NumberGuessingGame
         public User _user { get; set; }
         public Computer _comp { get; set; }
         public int numOfRounds { get; set; } = 5;
-        public int currentRound { get; set; } = 1;
 
         public int MinNum = 0;
-        public int MaxNum = 10;
+        public int MaxNum = 11;
 
-        //  Function to start game
-        //  Perhaps class constructor can init the sequence of events needed ?
+        //  Game Constructor
+        public Game()
+        {
+            Console.WriteLine("Your game is about to begin!");
+            endCommands();
+        }
 
+        //  game.Run() function that will handle the lifecycle of a game
+        public void Run()
+        {
+            numOfRounds = setNumRounds();
+            setPlayerNames();
+            playGame(numOfRounds);
+
+        }
 
         //  Ask player what number of rounds to play  
         public int setNumRounds()
         {
             //  Min should be 1 and max should be 10
-            Console.WriteLine("How many rounds should we play?");
+            Console.WriteLine("How many rounds should we play today?");
             int x = Convert.ToInt32(Console.ReadLine());
 
             if(x > MinNum && x < MaxNum)
             {
-                Console.WriteLine($"Ok, you are about to play {x}!");
+                Console.WriteLine(" ");
+                Console.WriteLine($"Ok, you are about to play {x} rounds!");
+                endCommands();
                 return x;
             }
             else
             {
+                Console.WriteLine(" ");
                 Console.WriteLine("Please pick a number between 1 and 10");
+                endCommands();
                 return setNumRounds();
             }
         }
@@ -68,19 +83,45 @@ namespace NumberGuessingGame
         {
             _user = new User(userN);
             _comp = new Computer(compN);
-            Console.WriteLine($"The battle is set between {userN} and {compN}!");
-            Thread.Sleep(500);
+            Console.WriteLine($"The battle is set between {userN} and {compN} to play {this.numOfRounds} rounds!");
+            Thread.Sleep(1000);
         }
 
 
 
-   
+
+        //  function for looping through rounds
+        private void playGame(int numRounds)
+        {
+            for(int i = 1; i < numRounds + 1; i++)
+            {
+                playRound(i);
+            }
+        }
+
+        //  function for each individual round
+        private void playRound(int i)
+        {
+            Console.WriteLine($"Starting round {i}!");
+        }
 
 
-
-        //  Have top of round and bottom of round
-        //  Each player picks and guesses
-
+        //  Function for adding smooth transitions between pieces of the game. 
+        //  This is to enhance UX
+        private void endCommands()
+        {
+            Thread.Sleep(250);
+            Console.WriteLine(".");
+            Thread.Sleep(250);
+            Console.WriteLine(".");
+            Thread.Sleep(250);
+            Console.WriteLine(".");
+            Thread.Sleep(250);
+            Console.WriteLine(".");
+            Thread.Sleep(250);
+            Console.WriteLine(".");
+            Console.WriteLine(" ");
+        }
 
 
     }
