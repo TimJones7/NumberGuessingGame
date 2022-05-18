@@ -64,15 +64,20 @@ namespace NumberGuessingGame
             Console.WriteLine("What is your name?");
             userName = Console.ReadLine();
             Console.WriteLine($"That's awesome {userName}");
-            Thread.Sleep(1000);
+            endCommands();
             Console.WriteLine("What should we call your opponent?");
             compName = Console.ReadLine();
             Console.WriteLine("Thank You!");
-            Thread.Sleep(1000);
+            endCommands();
 
-            if (userName != null && compName != null)
+            if (userName.Length > 0 && compName.Length > 0)
             {
                 createPlayers(userName, compName);
+            }
+            else
+            {
+                Console.WriteLine("NAMES CANT BE EMPTY, TRY AGAIN DOOFUS!");
+                setPlayerNames();
             }
         }
 
@@ -84,7 +89,7 @@ namespace NumberGuessingGame
             _user = new User(userN);
             _comp = new Computer(compN);
             Console.WriteLine($"The battle is set between {userN} and {compN} to play {this.numOfRounds} rounds!");
-            Thread.Sleep(1000);
+            endCommands();
         }
 
 
@@ -96,6 +101,7 @@ namespace NumberGuessingGame
             for(int i = 1; i < numRounds + 1; i++)
             {
                 playRound(i);
+                endCommands();
             }
         }
 
@@ -103,6 +109,31 @@ namespace NumberGuessingGame
         private void playRound(int i)
         {
             Console.WriteLine($"Starting round {i}!");
+        }
+
+
+
+
+
+        //  Function for finishing the game and recording the score
+         private void finishGame()
+        {
+            Console.WriteLine($"We had an epic battle of wits today between {_user.name} and {_comp.name};");
+            Console.WriteLine(" ");
+            Console.WriteLine("Please give us a second to tally the final score!");
+            endCommands();
+            if (_user.score > _comp.score)
+            {
+                Console.WriteLine("CONGRATULATIONS!!!");
+                Console.WriteLine(" ");
+                Console.WriteLine($"Today {_user.name} prevailed over {_comp.name} with a final score of {_user.score} to {_comp.score}!");
+            }
+        }
+
+        //  Function to ask if player would like to play again
+        private void playAgain()
+        {
+
         }
 
 
