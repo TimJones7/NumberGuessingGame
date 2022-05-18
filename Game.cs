@@ -31,7 +31,8 @@ namespace NumberGuessingGame
             numOfRounds = setNumRounds();
             setPlayerNames();
             playGame(numOfRounds);
-
+            finishGame();
+            playAgain();
         }
 
         //  Ask player what number of rounds to play  
@@ -102,6 +103,8 @@ namespace NumberGuessingGame
             {
                 playRound(i);
                 endCommands();
+                postScore();
+                endCommands();
             }
         }
 
@@ -116,7 +119,7 @@ namespace NumberGuessingGame
 
 
         //  Function for finishing the game and recording the score
-         private void finishGame()
+        private void finishGame()
         {
             Console.WriteLine($"We had an epic battle of wits today between {_user.name} and {_comp.name};");
             Console.WriteLine(" ");
@@ -126,14 +129,44 @@ namespace NumberGuessingGame
             {
                 Console.WriteLine("CONGRATULATIONS!!!");
                 Console.WriteLine(" ");
-                Console.WriteLine($"Today {_user.name} prevailed over {_comp.name} with a final score of {_user.score} to {_comp.score}!");
+                Console.WriteLine($"Today {_user.name} prevailed over {_comp.name} with a final score of: ");
+                postScore();
+                endCommands();
+            }
+            else if(_comp.score > _user.score)
+            {
+                Console.WriteLine("WOMP WOMP WOMP... YOU LOST!!!");
+                Console.WriteLine(" ");
+                Console.WriteLine($"Today {_comp.name} prevailed over {_user.name} with a final score of: ");
+                postScore();
+                endCommands();
+            }
+            else if(_comp.score == _user.score)
+            {
+                Console.WriteLine("Ain't that a bitch, nobody won!");
+                Console.WriteLine(" ");
+                Console.WriteLine("The final score today was: ");
+                postScore();
+                Console.WriteLine(" ");
             }
         }
 
         //  Function to ask if player would like to play again
         private void playAgain()
         {
-
+            Console.WriteLine(" ");
+            Console.WriteLine(" ");
+            Console.WriteLine("Would you like to play again? [Y] [N]");
+            char n = Console.ReadLine()[0];
+            if(n == 'y' || n == 'Y')
+            {
+                this.Run();
+            }
+            else
+            {
+                Console.WriteLine(" ");
+                Console.WriteLine("Fine, fuck off!");
+            }
         }
 
 
@@ -154,6 +187,12 @@ namespace NumberGuessingGame
             Console.WriteLine(" ");
         }
 
+
+        private void postScore()
+        {
+            Console.WriteLine($"{_user.name} - {_user.score}");
+            Console.WriteLine($"{_comp.name} - {_comp.score}");
+        }
 
     }
 }
